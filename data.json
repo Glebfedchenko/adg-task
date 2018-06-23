@@ -1,52 +1,10 @@
 [
   {
-    "id": "55aa62ef-9d53-40ec-852a-a9a88836342d",
-    "first_name": "Jake ",
-    "last_name": "Wilder",
-    "dob": "2001-09-19",
-    "location": "Washington"
-  },
-  {
-    "id": "9bf43bc7-4ea9-4db8-9658-e65438974971",
-    "first_name": "Jenny",
-    "last_name": "Watson",
-    "dob": "2001-09-09",
-    "location": "Boston"
-  },
-  {
-    "id": "cc13d1e2-f38a-4a32-aee3-afcd58d51cba",
-    "first_name": "Samanta",
-    "last_name": "Johnson",
-    "dob": "1988-12-12",
-    "location": "Kiev"
-  },
-  {
-    "id": "31f83a57-bedf-4a1c-97b4-906b6f4e5e08",
-    "first_name": "Jared",
-    "last_name": "Map",
-    "dob": "2011-12-12",
-    "location": "Kiev"
-  },
-  {
-    "id": "62fc6563-cddc-4e6e-9371-51fe0ae2c98c",
-    "first_name": "Nikola",
-    "last_name": "Tesla",
-    "dob": "1980-11-11",
-    "location": "Kiev"
-  },
-  {
     "id": "73c1c64b-83b3-4fbe-9d5e-584ca206a2ae",
     "first_name": "Darth",
     "last_name": "Vader",
     "dob": "2015-01-01",
     "location": "Kiev"
-  },
-  {
-    "id": "ba2b6dc8-0aa3-4a8b-959c-29e4c14c023e",
-    "first_name": "Chewbakka",
-    "last_name": "Chewie",
-    "dob": "1987-12-15",
-    "location": "Los Angeles"
   },
   {
     "id": "127a014f-e1d0-43ec-b1ad-71f76f92105e",
@@ -60,13 +18,13 @@
     "first_name": "Princess",
     "last_name": "Lea",
     "dob": "1999-01-02",
-    "location": "Char"
+    "location": "Kiev"
   },
   {
-    "id": "feb5c605-2d11-4433-ae6c-68039febe1e8",
-    "first_name": "Princess",
-    "last_name": "Lea",
-    "dob": "1988-11-11",
-    "location": "Char"
+    "id": "87dd4371-5d05-4a88-a847-bdcdf65b0d7b",
+    "first_name": "Obi Van ",
+    "last_name": "Kenoy",
+    "dob": "1988-01-12",
+    "location": "Hoth"
   }
 ]

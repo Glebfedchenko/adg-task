@@ -26,9 +26,7 @@ export const people = (state = initialState, action) => {
         ...state,
         people: state.people.map(
           person =>
-            person.id === action.payload
-              ? { ...person, editing: !person.editing }
-              : person
+            person.id === action.payload ? { ...person, editing: true } : person
         )
       };
     case actions.UPDATE_PERSON:
@@ -36,15 +34,25 @@ export const people = (state = initialState, action) => {
         ...state,
         people: state.people.map(
           person =>
-            person.id === action.payload
+            person.id === action.payload.id
               ? {
                   ...person,
-                  first_name: action.payload.data.first_name,
-                  last_name: action.payload.data.last_name,
-                  dob: action.payload.data.dob,
-                  location: action.payload.data.location,
-                  editing: !person.editing
+                  first_name: action.payload.person.first_name,
+                  last_name: action.payload.person.last_name,
+                  dob: action.payload.person.dob,
+                  location: action.payload.person.location,
+                  editing: false
                 }
+              : person
+        )
+      };
+    case actions.CANCEL_UPDATE:
+      return {
+        ...state,
+        people: state.people.map(
+          person =>
+            person.id === action.payload
+              ? { ...person, editing: false }
               : person
         )
       };

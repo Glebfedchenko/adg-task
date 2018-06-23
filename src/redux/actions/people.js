@@ -23,14 +23,24 @@ export const editPerson = id => {
     payload: id
   };
 };
-export const updatePerson = (id, data) => {
-  const request = axios.put(`/users/${id}`).then(result => result.data);
+
+export const updatePerson = (id, person) => {
+  const request = axios.put(`/users/${id}`, person);
   return {
     type: actions.UPDATE_PERSON,
-    payload: { id, data }
+    payload: {
+      id,
+      person
+    }
   };
 };
 
+export const cancelUpdatePerson = id => {
+  return {
+    type: actions.CANCEL_UPDATE,
+    payload: id
+  };
+};
 export const addPerson = person => {
   const request = axios.post("/users", person).then(result => result.data);
   return {

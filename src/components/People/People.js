@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import Person from "./Person";
+import EditPerson from "./EditPerson";
 import { connect } from "react-redux";
 import { getPeople } from "../../redux/actions/people";
 
@@ -27,13 +28,22 @@ class People extends Component {
               <th scope="col">Surname</th>
               <th scope="col">Date</th>
               <th scope="col">Location</th>
-              <th scope="col">Delete </th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
             {people
-              ? people.map((person, i) => {
-                  return <Person key={i} person={person} />;
+              ? people.map(person => {
+                  return (
+                    <Fragment key={person.id}>
+                      {person.editing ? (
+                        <EditPerson person={person} />
+                      ) : (
+                        <Person person={person} />
+                      )}
+                    </Fragment>
+                  );
                 })
               : null}
           </tbody>
@@ -47,6 +57,8 @@ People.propTypes = {
   getPeople: PropTypes.func.isRequired
 };
 export default connect(
-  state => ({ people: state.people.people }),
+  state => ({
+    people: state.people.people
+  }),
   dispatch => ({ getPeople: () => dispatch(getPeople()) })
 )(People);
