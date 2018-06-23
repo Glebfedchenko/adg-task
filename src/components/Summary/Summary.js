@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getBirthday, go } from "./helpers";
 import { connect } from "react-redux";
+import { go } from "./helpers";
 
 const Summary = ({ people }) => {
   const fromKiev = people.filter(
     person => person.location === "Kiev" || person.location === "kiev"
   );
 
-const dates = users
-    .filter(user => user.dob !== null)
-    .map(d => d.dob)
+  const dates = people
+    .filter(person => person.dob !== null)
+    .map(person => person.dob)
     .sort(function(a, b) {
       a = a
         .split("-")
@@ -25,14 +25,12 @@ const dates = users
     .slice(0, 3);
   const sumOfDates = go(dates);
 
-  const firstMinDate = moment.min(dates);
-
   const firstNames = people
-    .filter(user => user.first_name !== null)
+    .filter(person => person.first_name !== null)
     .map(fn => fn.first_name);
   const lastNames = people
-    .filter(user => user.last_name !== null)
-    .map(ln => ln.last_name);
+    .filter(person => person.last_name !== null)
+    .map(person => person.last_name);
   function longest(arr) {
     var lgth = 0;
     var longest;
@@ -48,7 +46,8 @@ const dates = users
     <div className="summary">
       <h1>Summary</h1>
       <p>{`There are ${people ? fromKiev.length : null} people from Kiev`}</p>
-      <p>{`The sum of ages of three oldest people from table : ${sumOfDates}`}</p>
+      <p
+      >{`The sum of ages of three oldest people from table : ${sumOfDates}`}</p>
       <p>{`Longest string of first name + last name pair is ${longest(
         firstNames
       )} and ${longest(lastNames)}`}</p>
