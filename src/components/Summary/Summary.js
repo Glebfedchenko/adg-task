@@ -1,15 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { getBirthday, go } from "./helpers";
 import { connect } from "react-redux";
-import moment from "moment";
+
 const Summary = ({ people }) => {
   const fromKiev = people.filter(
     person => person.location === "Kiev" || person.location === "kiev"
   );
 
-  const dates = people
+const dates = users
     .filter(user => user.dob !== null)
-    .map(d => moment(d.dob));
+    .map(d => d.dob)
+    .sort(function(a, b) {
+      a = a
+        .split("-")
+        .reverse()
+        .join("");
+      b = b
+        .split("-")
+        .reverse()
+        .join("");
+      return a > b ? 1 : a < b ? -1 : 0;
+    })
+    .slice(0, 3);
+  const sumOfDates = go(dates);
 
   const firstMinDate = moment.min(dates);
 
@@ -34,7 +48,7 @@ const Summary = ({ people }) => {
     <div className="summary">
       <h1>Summary</h1>
       <p>{`There are ${people ? fromKiev.length : null} people from Kiev`}</p>
-      <p>{`The sum of ages of three oldes people from table is`}</p>
+      <p>{`The sum of ages of three oldest people from table : ${sumOfDates}`}</p>
       <p>{`Longest string of first name + last name pair is ${longest(
         firstNames
       )} and ${longest(lastNames)}`}</p>
