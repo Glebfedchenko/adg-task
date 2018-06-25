@@ -1,90 +1,111 @@
-import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
-import { addPerson } from "../../redux/actions/people";
-import { connect } from "react-redux";
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addPerson } from '../../redux/actions/people';
 
 class Form extends Component {
-  state = {
-    formdata: {
-      first_name: "",
-      last_name: "",
-      dob: "",
-      location: ""
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      formdata: {
+        first_name: '',
+        last_name: '',
+        dob: '',
+        location: '',
+      },
+    };
+  }
+
+
+  onSubmit = (e) => {
+    e.preventDefault();// eslint-disable-next-line
+    this.props.addPerson({ ...this.state.formdata });
+    this.setState({
+      formdata: {
+        first_name: '',
+        last_name: '',
+        dob: '',
+        location: '',
+      },
+    });
   };
 
   handleInput = (e, name) => {
-    const newFormdata = {
-      ...this.state.formdata
+    const newFormdata = {// eslint-disable-next-line
+      ...this.state.formdata,
     };
     newFormdata[name] = e.target.value;
     this.setState({ formdata: newFormdata });
   };
-  onSubmit = e => {
-    e.preventDefault();
-    this.props.addPerson({ ...this.state.formdata });
-    this.setState({
-      formdata: {
-        first_name: "",
-        last_name: "",
-        dob: "",
-        location: ""
-      }
-    });
-  };
+
   render() {
+    const { formdata } = this.state;
     return (
       <Fragment>
-        <h1>Form</h1>
+        <h1>
+          Form
+        </h1>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter name"
-              value={this.state.formdata.first_name}
-              onChange={e => this.handleInput(e, "first_name")}
-            />
+            <label htmlFor="name">
+              Name
+              <input
+                id="name"
+                type="text"
+                className="form-control"
+                placeholder="Enter name"
+                value={formdata.first_name}
+                onChange={e => this.handleInput(e, 'first_name')}
+              />
+            </label>
           </div>
           <div className="form-group">
-            <label>Surname</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter surname"
-              value={this.state.formdata.last_name}
-              onChange={e => this.handleInput(e, "last_name")}
-            />
+            <label htmlFor="surname">
+              Surname
+              <input
+                id="surname"
+                type="text"
+                className="form-control"
+                placeholder="Enter surname"
+                value={formdata.last_name}
+                onChange={e => this.handleInput(e, 'last_name')}
+              />
+            </label>
           </div>
           <div className="form-group">
-            <label>Date</label>
-            <input
-              type="date"
-              min="1979-12-31"
-              max="3000-12-31"
-              className="form-control"
-              placeholder="mm/dd/yyyy"
-              value={this.state.formdata.dob}
-              onChange={e => this.handleInput(e, "dob")}
-            />
+            <label htmlFor="date">
+              Date
+              <input
+                id="date"
+                type="date"
+                min="1979-12-31"
+                max="3000-12-31"
+                className="form-control"
+                placeholder="mm/dd/yyyy"
+                value={formdata.dob}
+                onChange={e => this.handleInput(e, 'dob')}
+              />
+            </label>
           </div>
           <div className="form-group">
-            <label>Location</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter location"
-              value={this.state.formdata.location}
-              onChange={e => this.handleInput(e, "location")}
-            />
+            <label htmlFor="loctation">
+              Location
+              <input
+                id="location"
+                type="text"
+                className="form-control"
+                placeholder="Enter location"
+                value={formdata.location}
+                onChange={e => this.handleInput(e, 'location')}
+              />
+            </label>
           </div>
           <button
             disabled={
-              !this.state.formdata.dob ||
-              !this.state.formdata.first_name ||
-              !this.state.formdata.last_name ||
-              !this.state.formdata.location
+              !formdata.dob
+              || !formdata.first_name
+              || !formdata.last_name
+              || !formdata.location
             }
             type="submit"
             className="btn btn-primary"
@@ -97,9 +118,9 @@ class Form extends Component {
   }
 }
 Form.propTypes = {
-  addPerson: PropTypes.func.isRequired
+  addPerson: PropTypes.func.isRequired,
 };
 export default connect(
   null,
-  dispatch => ({ addPerson: data => dispatch(addPerson(data)) })
+  dispatch => ({ addPerson: data => dispatch(addPerson(data)) }),
 )(Form);

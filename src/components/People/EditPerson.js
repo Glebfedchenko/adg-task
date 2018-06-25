@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { cancelUpdatePerson, updatePerson } from "../../redux/actions/people";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { cancelUpdatePerson, updatePerson } from '../../redux/actions/people';
 
 class EditPerson extends Component {
-  handleEdit = e => {
-    e.preventDefault();
-    const first_name = this.getName.value;
+  handleEdit = (e) => {
+    e.preventDefault();// eslint-disable-next-line
+    const first_name = this.getName.value;// eslint-disable-next-line
     const last_name = this.getSurname.value;
     const dob = this.getDate.value;
     const location = this.getLocation.value;
@@ -14,44 +14,51 @@ class EditPerson extends Component {
       first_name,
       last_name,
       dob,
-      location
-    };
+      location,
+    };// eslint-disable-next-line
     this.props.updatePerson(this.props.person.id, person);
   };
 
   render() {
-    const { first_name, last_name, location, dob, id } = this.props.person;
+    const {
+      person,
+    } = this.props;
     return (
       <tr className="text-center">
         <td>
           <input
-            defaultValue={first_name}
-            ref={input => (this.getName = input)}
+            defaultValue={person.first_name}
+            ref={(input) => { this.getName = input; }}
           />
         </td>
         <td>
           <input
-            defaultValue={last_name}
-            ref={input => (this.getSurname = input)}
+            defaultValue={person.last_name}
+            ref={(input) => { this.getSurname = input; }}
           />
         </td>
         <td>
-          <input defaultValue={dob} ref={input => (this.getDate = input)} />
+          <input defaultValue={person.dob} ref={(input) => { this.getDate = input; }} />
         </td>
         <td>
           <input
-            defaultValue={location}
-            ref={input => (this.getLocation = input)}
+            defaultValue={person.location}
+            ref={(input) => { this.getLocation = input; }}
           />
         </td>
         <td>
-          <button onClick={this.handleEdit} className="btn btn-success">
+          <button
+            type="submit"
+            onClick={this.handleEdit}
+            className="btn btn-success"
+          >
             Update
           </button>
         </td>
         <td>
           <button
-            onClick={() => this.props.cancelUpdatePerson(id)}
+            type="submit" // eslint-disable-next-line
+            onClick={() => this.props.cancelUpdatePerson(person.id)}
             className="btn btn-danger"
           >
             Close
@@ -62,15 +69,15 @@ class EditPerson extends Component {
   }
 }
 
-EditPerson.propTypes = {
+EditPerson.propTypes = { // eslint-disable-next-line
   person: PropTypes.object.isRequired,
   cancelUpdatePerson: PropTypes.func.isRequired,
-  updatePerson: PropTypes.func.isRequired
+  updatePerson: PropTypes.func.isRequired,
 };
 export default connect(
   null,
   dispatch => ({
     updatePerson: (id, person) => dispatch(updatePerson(id, person)),
-    cancelUpdatePerson: id => dispatch(cancelUpdatePerson(id))
-  })
+    cancelUpdatePerson: id => dispatch(cancelUpdatePerson(id)),
+  }),
 )(EditPerson);
